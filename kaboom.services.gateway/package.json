@@ -1,0 +1,28 @@
+{
+  "name": "kaboom.services.gateway",
+  "version": "1.0.0",
+  "description": "Kaboom Gateway Service",
+  "main": "app.js",
+  "author": {
+    "name": "artemkv",
+    "email": "artemkv@gmail.com"
+  },
+  "dependencies": {
+    "connect": "3.6.6",
+    "serve-favicon": "2.5.0",
+    "@artemkv/statuscodes": "1.0.2",
+    "@artemkv/statusmessages": "1.0.0",
+    "@artemkv/resterror": "1.0.0",
+    "@artemkv/reststats": "1.0.0",
+    "@artemkv/errorhandler": "1.0.1",
+    "@artemkv/myrequest": "1.0.1"
+  },
+  "devDependencies": {
+    "mocha": "3.5.0",
+    "chai": "4.1.1",
+    "request": "2.88.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
