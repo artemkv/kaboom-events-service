@@ -7,6 +7,7 @@ const statusMessages = require('@artemkv/statusmessages');
 const RestError = require('@artemkv/resterror');
 const restStats = require('@artemkv/reststats');
 const readJSON = require('./readjson');
+const commitLog = require('./commitlog');
 
 const postEvent = function (req, res, next) {
     if (req.method !== 'POST') {
@@ -20,8 +21,10 @@ const postEvent = function (req, res, next) {
     let promise = new Promise(readJSON(req, MAX_LENGTH));
 
     promise
-        .then(function (json) {
-            console.log(json);
+        .then(function (event) {
+            console.log(event); // TODO: remove
+
+            commitLog.addEvent(JSON.stringify(event));
 
             res.statusCode = statusCodes.OK;
             res.end();
