@@ -37,7 +37,7 @@ server
 // Start the server
 let env = process.env;
 let port = env.NODE_PORT || 8000;
-let ip = env.NODE_IP || '192.168.1.5'; // TODO: hard-coded IP
+let ip = env.NODE_IP || 'localhost';
 server.listen(port, ip, function () {
     console.log('Application started');
     console.log('http://' + ip + ":" + port + '/');
