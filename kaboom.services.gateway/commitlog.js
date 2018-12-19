@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const memdata = require('./memdata');
-const dateTimeUtil = require('./datetimeutil');
+const dateTimeUtil = require('@artemkv/datetimeutil');
 
 let _commitLogDir = `${__dirname}/commit_log`;
 
@@ -35,6 +35,8 @@ const initialize = function () {
             }
         }
     });
+
+    console.log(`${dateTimeUtil.getTimeStamp()} All loaded`);
 }
 
 const addEvent = function (event) {

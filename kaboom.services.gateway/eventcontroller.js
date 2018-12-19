@@ -6,7 +6,7 @@ const statusCodes = require('@artemkv/statuscodes');
 const statusMessages = require('@artemkv/statusmessages');
 const RestError = require('@artemkv/resterror');
 const restStats = require('@artemkv/reststats');
-const readJSON = require('./readjson');
+const readJsonStream = require('@artemkv/readjsonstream');
 const commitLog = require('./commitlog');
 
 const postEvent = function (req, res, next) {
@@ -18,7 +18,7 @@ const postEvent = function (req, res, next) {
         throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
     }
 
-    let promise = new Promise(readJSON(req, MAX_LENGTH));
+    let promise = new Promise(readJsonStream(req, MAX_LENGTH));
 
     promise
         .then(function (event) {

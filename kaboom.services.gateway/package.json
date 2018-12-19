@@ -15,7 +15,9 @@
     "@artemkv/resterror": "1.0.0",
     "@artemkv/reststats": "1.0.0",
     "@artemkv/errorhandler": "1.0.1",
-    "@artemkv/myrequest": "1.0.1"
+    "@artemkv/myrequest": "1.0.1",
+    "@artemkv/datetimeutil": "1.0.0",
+    "@artemkv/readjsonstream": "1.0.0"
   },
   "devDependencies": {
     "mocha": "3.5.0",
