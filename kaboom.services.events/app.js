@@ -7,7 +7,6 @@ const errorHandler = require('@artemkv/errorhandler');
 const myRequest = require('@artemkv/myrequest');
 const version = require('./myversion');
 const eventController = require('./eventcontroller');
-const commitLog = require('./commitlog');
 
 let server = connect();
 
@@ -42,5 +41,4 @@ server.listen(port, ip, function () {
     console.log('Application started');
     console.log('http://' + ip + ":" + port + '/');
     restStats.initialize(version);
-    commitLog.initialize();
 });

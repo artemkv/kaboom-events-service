@@ -7,7 +7,7 @@ const statusMessages = require('@artemkv/statusmessages');
 const RestError = require('@artemkv/resterror');
 const restStats = require('@artemkv/reststats');
 const readJsonStream = require('@artemkv/readjsonstream');
-const commitLog = require('./commitlog');
+const kafkaConnector = require('./kafkaconnector');
 
 const postEvent = function (req, res, next) {
     if (req.method !== 'POST') {
@@ -21,10 +21,14 @@ const postEvent = function (req, res, next) {
     let promise = new Promise(readJsonStream(req, MAX_LENGTH));
 
     promise
-        .then(function (event) {
+        .then(function sendToKafka(event) {
             console.log(event); // TODO: remove
 
-            commitLog.addEvent(JSON.stringify(event));
+            // TODO: correct event type
+            return kafkaConnector.produce("eventtype", JSON.stringify(event));
+        })
+        .then(function done(report) {
+            console.log(report); // TODO: remove
 
             res.statusCode = statusCodes.OK;
             res.end();
