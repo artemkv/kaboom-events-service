@@ -1,7 +1,7 @@
 {
-  "name": "kaboom.services.gateway",
+  "name": "kaboom.services.events",
   "version": "1.0.0",
-  "description": "Kaboom Gateway Service",
+  "description": "Kaboom Events Service",
   "main": "app.js",
   "author": {
     "name": "artemkv",

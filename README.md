@@ -1,4 +1,4 @@
-Kaboom Gateway Service
+Kaboom Events Service
 
 POST to /event to register application launch/crash
 
