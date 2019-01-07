@@ -10,6 +10,8 @@ const readJsonStream = require('@artemkv/readjsonstream');
 const kafkaConnector = require('./kafkaconnector');
 
 const postEvent = function (req, res, next) {
+    // TODO: think about CORS
+
     if (req.method !== 'POST') {
         throw new RestError(statusCodes.MethodNotAllowed, statusMessages.MethodNotAllowed);
     }
@@ -22,14 +24,11 @@ const postEvent = function (req, res, next) {
 
     promise
         .then(function sendToKafka(event) {
-            console.log(event); // TODO: remove
-
-            // TODO: correct event type
-            return kafkaConnector.produce("eventtype", JSON.stringify(event));
+            validateEvent(event);
+            let eventType = getEventType(event);
+            return kafkaConnector.produce(eventType, eventType, JSON.stringify(event));
         })
-        .then(function done(report) {
-            console.log(report); // TODO: remove
-
+        .then(function done() {
             res.statusCode = statusCodes.OK;
             res.end();
 
@@ -39,6 +38,25 @@ const postEvent = function (req, res, next) {
         .catch(function (err) {
             next(err);
         });
+}
+
+function validateEvent(e) {
+    if (!e.t) {
+        throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+    }
+    if (!e.a) {
+        throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+    }
+}
+
+function getEventType(e) {
+    if (e.t == "C") {
+        return "crash_event"
+    }
+    if (e.t == "S") {
+        return "launch_event";
+    }
+    throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
 }
 
 exports.postEvent = postEvent;
