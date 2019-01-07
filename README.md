@@ -3,6 +3,7 @@ Kaboom Events Service
 POST to /event to register application launch/crash
 
 Event:
+```
 	t: type
 		S: app start
 		C: app crash
@@ -10,7 +11,7 @@ Event:
 	dt: date and time (on the client)
 	m: message
 	d: details (Base64-encoded)
-	
+```	
 
 Launch event:
 ```
