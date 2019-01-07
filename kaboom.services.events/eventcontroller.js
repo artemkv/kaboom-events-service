@@ -25,6 +25,7 @@ const postEvent = function (req, res, next) {
     promise
         .then(function sendToKafka(event) {
             validateEvent(event);
+            event.dts = new Date();
             let eventType = getEventType(event);
             return kafkaConnector.produce(eventType, eventType, JSON.stringify(event));
         })
