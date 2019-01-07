@@ -1,11 +1,14 @@
 "use strict";
 
+const dotenv = require('dotenv');
 const kafka = require('node-rdkafka');
+
+dotenv.config();
 
 function produce(key, message) {
     var producer = new kafka.Producer({
         'client.id': 'kaboom.services.events',
-        'metadata.broker.list': 'localhost:9092', // TODO:
+        'metadata.broker.list': process.env.KAFKA_BROKER_LIST,
         'dr_cb': true // specifies that we want a delivery-report event to be generated
     });
 

@@ -1,5 +1,6 @@
 "use strict";
 
+const dotenv = require('dotenv');
 const connect = require('connect');
 const favicon = require('serve-favicon');
 const restStats = require('@artemkv/reststats');
@@ -7,6 +8,8 @@ const errorHandler = require('@artemkv/errorhandler');
 const myRequest = require('@artemkv/myrequest');
 const version = require('./myversion');
 const eventController = require('./eventcontroller');
+
+dotenv.config();
 
 let server = connect();
 
