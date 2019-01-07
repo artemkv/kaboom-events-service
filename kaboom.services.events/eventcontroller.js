@@ -27,7 +27,8 @@ const postEvent = function (req, res, next) {
             validateEvent(event);
             event.dts = new Date();
             let eventType = getEventType(event);
-            return kafkaConnector.produce(eventType, eventType, JSON.stringify(event));
+            let appId = getAppId(event);
+            return kafkaConnector.produce(eventType, appId, JSON.stringify(event));
         })
         .then(function done() {
             res.statusCode = statusCodes.OK;
@@ -58,6 +59,10 @@ function getEventType(e) {
         return "launch_event";
     }
     throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+}
+
+function getAppId(e) {
+    return e.a;
 }
 
 exports.postEvent = postEvent;
