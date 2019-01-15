@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/artemkv/kaboom-events-service.svg?style=svg)](https://circleci.com/gh/artemkv/kaboom-events-service)
+
 Kaboom Events Service
 
 # API
