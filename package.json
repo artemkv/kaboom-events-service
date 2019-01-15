@@ -28,6 +28,8 @@
     "windows-build-tools": "^5.1.0"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node app.js",
+    "integration-test": "mocha",
+    "test": "echo TODO"
   }
 }
