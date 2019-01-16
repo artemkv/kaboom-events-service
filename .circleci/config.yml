@@ -40,3 +40,9 @@ jobs:
       - run: npm test
 
       - run: npm run docker-build
+
+      - deploy:
+          name: Publish docker image to docker hub
+          command: |      
+            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+            npm run docker-push
