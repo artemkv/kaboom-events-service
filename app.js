@@ -38,7 +38,7 @@ server
 
 // Start the server
 let env = process.env;
-let port = env.NODE_PORT || 8000;
+let port = env.NODE_PORT || 8600;
 let ip = env.NODE_IP || 'localhost';
 server.listen(port, ip, function () {
     console.log('Application started');
