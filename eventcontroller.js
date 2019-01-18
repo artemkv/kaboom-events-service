@@ -7,7 +7,7 @@ const statusMessages = require('@artemkv/statusmessages');
 const RestError = require('@artemkv/resterror');
 const restStats = require('@artemkv/reststats');
 const readJsonStream = require('@artemkv/readjsonstream');
-const kafkaConnector = require('./kafkaconnector');
+const kafkaConnector = require('./connectorprovider').getKafkaConnector();
 
 const postEvent = function (req, res, next) {
     // TODO: think about CORS

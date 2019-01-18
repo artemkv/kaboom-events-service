@@ -31,8 +31,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "integration-test": "mocha",
-    "test": "echo TODO",
+    "integration-test": "mocha integration-test",
+    "test": "mocha",
     "docker-build": "docker build -t artemkv/kaboom-events-service:latest .",
     "docker-push": "docker push artemkv/kaboom-events-service:latest"
   }
