@@ -40,7 +40,7 @@ jobs:
       - run: npm test
 
       # run integration tests!
-      - run: NODE_ENV=test npm start & wait-on http://localhost:8600
+      - run: NODE_ENV=test npm start &
       - run: npm run integration-test
 
       - run: npm run docker-build
