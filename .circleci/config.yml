@@ -40,8 +40,11 @@ jobs:
       - run: npm test
 
       # run integration tests!
-      - run: NODE_ENV=test npm start &
-      - run: npm run integration-test
+      - run:
+          name: Run integration tests
+          command: |
+            NODE_ENV=test npm start &
+            npm run integration-test
 
       - run: npm run docker-build
 
