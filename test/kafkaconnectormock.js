@@ -14,7 +14,7 @@ function produce(topicName, key, message) {
 
         allCallData.counter++;
 
-        resolve();
+        process.nextTick(resolve);
     });
 
     return promise;
