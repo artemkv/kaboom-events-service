@@ -1,6 +1,6 @@
 FROM node:10
 
-RUN mkdir -p /home/node/kaboom.services.events/node_modules && chown -R node:node /home/node/kaboom.services.events
+RUN mkdir -p /home/node/kaboom.services.events/node_modules && mkdir -p /home/node/kaboom.services.events/log && chown -R node:node /home/node/kaboom.services.events
 
 WORKDIR /home/node/kaboom.services.events
 
