@@ -17,6 +17,7 @@
     "@artemkv/statuscodes": "1.0.2",
     "@artemkv/statusmessages": "1.0.0",
     "connect": "3.6.6",
+    "content-type": "^1.0.4",
     "dotenv": "^6.2.0",
     "node-rdkafka": "^2.5.1",
     "serve-favicon": "2.5.0",

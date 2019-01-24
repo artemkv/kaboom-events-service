@@ -7,17 +7,21 @@ const statusMessages = require('@artemkv/statusmessages');
 const RestError = require('@artemkv/resterror');
 const restStats = require('@artemkv/reststats');
 const readJsonStream = require('@artemkv/readjsonstream');
+const contentTypeParser = require('content-type');
 const kafkaConnector = require('./connectorprovider').getKafkaConnector();
 
 const postEvent = function (req, res, next) {
-    // TODO: think about CORS
-
     if (req.method !== 'POST') {
         throw new RestError(statusCodes.MethodNotAllowed, statusMessages.MethodNotAllowed);
     }
     let contentType = req.headers['content-type'];
-    if (contentType !== 'application/json') {
-        throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+    if (!contentType) {
+        throw new RestError(statusCodes.BadRequest, 'content-type header was not found.');
+    }
+    let contentTypeParsed = contentTypeParser.parse(contentType);
+    if (contentTypeParsed.type !== 'application/json') {
+        let message = `invalid value of content-type header. Expected: 'application/json', Actual: ${contentTypeParsed.type}.`;
+        throw new RestError(statusCodes.BadRequest, message);
     }
 
     let promise = new Promise(readJsonStream(req, MAX_LENGTH));
@@ -44,10 +48,10 @@ const postEvent = function (req, res, next) {
 
 function validateEvent(e) {
     if (!e.t) {
-        throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+        throw new RestError(statusCodes.BadRequest, 'event does not have type specified in property "t".');
     }
     if (!e.a) {
-        throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+        throw new RestError(statusCodes.BadRequest, 'event does not have appCode specified in property "a".');
     }
 }
 
@@ -58,7 +62,7 @@ function getEventType(e) {
     if (e.t == "S") {
         return "launch_event";
     }
-    throw new RestError(statusCodes.BadRequest, statusMessages.BadRequest);
+    throw new RestError(statusCodes.BadRequest, `Unknown event type ${e.t}. Allowed values: "C" (crash), "S" (start).`);
 }
 
 function getAppId(e) {
