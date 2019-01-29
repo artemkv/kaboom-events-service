@@ -7,6 +7,12 @@ const expect = chai.expect;
 const request = require('request');
 
 describe('[REST Api Test Suite]', function () {
+    it(':) Health check', function (done) {
+        request.get(`${SERVICE_URL}/health`, function (error, response, body) {
+            expect(response.statusCode).to.equal(200);
+            done();
+        });
+    });
 
     it(':( Try accessing root', function (done) {
         request.get(SERVICE_URL, function (error, response, body) {

@@ -11,6 +11,7 @@ const requestTime = require('./requesttime');
 const version = require('./myversion');
 const eventController = require('./eventcontroller');
 const logger = require('./logger');
+const health = require('./health');
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ server
     .use(favicon('./favicon.ico'))
 
     // Used for testing / health checks
+    .use('/health', health.handleHealthCheck)
     .use('/error', errorHandler.handleError)
     .use('/resterror', errorHandler.handleRestError)
 
